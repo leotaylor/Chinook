@@ -65,3 +65,16 @@ Join Employee E
 on C.SupportRepId = E.EmployeeId
 Join Invoice I 
 on I.CustomerId = C.CustomerId
+
+-- total_invoices_{year}.sql: How many Invoices were there in 2009 and 2011?
+
+SELECT
+	Year2009 = Count(InvoiceId)
+FROM Invoice
+Where Year(InvoiceDate) = 2009
+
+SELECT
+	Year2011 = Count(InvoiceId)
+FROM Invoice
+Where Year(InvoiceDate) = 2011
+
