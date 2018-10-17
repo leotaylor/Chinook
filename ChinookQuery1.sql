@@ -90,3 +90,10 @@ SELECT
 	Sales2011 = SUM(Total)
 FROM Invoice
 WHERE YEAR(InvoiceDate) = 2011 
+
+-- invoice_37_line_item_count.sql: Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for Invoice ID 37.
+
+SELECT 
+	LineItems = Count(InvoiceLineId)
+FROM InvoiceLine
+WHERE InvoiceId = 37
