@@ -26,3 +26,10 @@ FROM Invoice I
 left join Customer c
 on I.CustomerId = C.CustomerId
 WHERE BillingCountry = 'Brazil'
+
+-- sales_agents.sql: Provide a query showing only the Employees who are Sales Agents.
+
+SELECT 
+	FullName = FirstName + ' ' + LastName
+FROM Employee
+Where Title = 'Sales Support Agent'
