@@ -78,3 +78,15 @@ SELECT
 FROM Invoice
 Where Year(InvoiceDate) = 2011
 
+
+-- total_sales_{year}.sql: What are the respective total sales for each of those years?
+
+SELECT 
+	Sales2009 = SUM(Total)
+FROM Invoice
+WHERE YEAR(InvoiceDate) = 2009 
+
+SELECT 
+	Sales2011 = SUM(Total)
+FROM Invoice
+WHERE YEAR(InvoiceDate) = 2011 
