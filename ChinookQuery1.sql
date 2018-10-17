@@ -7,3 +7,9 @@ SELECT
 	Country
 from Customer
 WHERE Country != 'USA'
+
+-- brazil_customers.sql: Provide a query only showing the Customers from Brazil.
+
+Select * 
+ from Customer
+ WHERE Country = 'Brazil';
