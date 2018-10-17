@@ -52,3 +52,16 @@ On E.EmployeeId = C.SupportRepId
 Join Invoice I 
 On I.CustomerId = C.CustomerId
 WHERE E.Title = 'Sales Support Agent'
+
+-- invoice_totals.sql: Provide a query that shows the Invoice Total, Customer name, Country and Sale Agent name for all invoices and customers.
+
+SELECT 
+ InvoiceTotal = I.Total,
+ CustomerName = C.FirstName + ' ' + C.LastName,
+ C.Country,
+ Agent = E.FirstName + ' ' + E.LastName
+FROM Customer C
+Join Employee E
+on C.SupportRepId = E.EmployeeId
+Join Invoice I 
+on I.CustomerId = C.CustomerId
