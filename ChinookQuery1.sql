@@ -273,3 +273,21 @@ JOIN Invoice I
 ON I.InvoiceId = IL.InvoiceId
 GROUP BY T.Name
 ORDER BY NumberPurchased DESC
+
+-- top_3_artists.sql: Provide a query that shows the top 3 best selling artists.
+
+
+SELECT TOP 3
+	Artist = AR.Name,
+	NumberPurchased = SUM(IL.Quantity)
+FROM InvoiceLine IL
+JOIN Track T
+ON IL.TrackId = T.TrackId
+JOIN Invoice I 
+ON I.InvoiceId = IL.InvoiceId
+JOIN Album Al
+ON Al.AlbumId = T.AlbumId
+JOIN Artist AR
+ON AR.ArtistId = AL.ArtistId
+GROUP BY AR.Name
+ORDER BY NumberPurchased DESC
