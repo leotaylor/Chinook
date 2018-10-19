@@ -246,3 +246,17 @@ SELECT TOP 1
 FROM Invoice
 GROUP BY BillingCountry
 ORDER BY SUM(Total) DESC
+
+-- top_2013_track.sql: Provide a query that shows the most purchased track of 2013.
+
+SELECT TOP 15
+	TopTrack = T.Name,
+	NumberPurchased = SUM(IL.Quantity)
+FROM InvoiceLine IL
+JOIN Track T
+ON IL.TrackId = T.TrackId
+JOIN Invoice I 
+ON I.InvoiceId = IL.InvoiceId
+WHERE YEAR(I.InvoiceDate) = '2013'
+GROUP BY T.Name
+ORDER BY NumberPurchased DESC
