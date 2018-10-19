@@ -173,3 +173,15 @@ FROM InvoiceLine IL
 Join Invoice I
 ON i.InvoiceId = il.InvoiceId
 GROUP BY I.InvoiceId
+
+-- sales_agent_total_sales.sql: Provide a query that shows total sales made by each sales agent
+
+SELECT 
+	Employee = E.FirstName + ' ' + E.LastName,
+	Total = SUM(I.Total)
+FROM Employee E
+JOIN Customer C
+ON E.EmployeeId = C.SupportRepId
+JOIN Invoice I
+ON I.CustomerId = C.CustomerId
+GROUP BY E.FirstName + ' ' + E.LastName
