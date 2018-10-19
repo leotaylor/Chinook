@@ -185,3 +185,23 @@ ON E.EmployeeId = C.SupportRepId
 JOIN Invoice I
 ON I.CustomerId = C.CustomerId
 GROUP BY E.FirstName + ' ' + E.LastName
+
+-- top_2009_agent.sql: Which sales agent made the most in sales in 2009?
+
+SELECT TOP 1 
+	Employee,
+	Total = MAX(TotalsFor2009.Totals)
+FROM (
+	SELECT
+		Employee = E.FirstName + ' ' + E.LastName,
+		Totals = SUM(Total)
+	FROM Invoice I
+	JOIN Customer C
+	ON C.CustomerId = I.CustomerId
+	JOIN Employee E
+	ON E.EmployeeId = C.SupportRepId
+	WHERE YEAR(I.InvoiceDate) = '2009'
+	GROUP BY E.FirstName + ' ' + E.LastName
+	) as TotalsFor2009
+GROUP BY Employee
+ORDER BY Total DESC
