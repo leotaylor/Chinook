@@ -236,3 +236,13 @@ SELECT
 	TotaSales = SUM(Total)
 FROM Invoice
 GROUP BY BillingCountry
+ORDER BY SUM(Total) DESC
+
+-- top_country.sql: Which country's customers spent the most?
+
+SELECT TOP 1
+	BillingCountry,
+	TotaSales = SUM(Total)
+FROM Invoice
+GROUP BY BillingCountry
+ORDER BY SUM(Total) DESC
