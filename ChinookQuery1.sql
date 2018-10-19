@@ -140,15 +140,6 @@ Group BY BillingCountry
 -- playlists_track_count.sql: Provide a query that shows the total number of tracks in each playlist. 
 -- The Playlist name should be include on the resulant table.
 
-SELECT Top 10 *
-FROM Playlist
-
-SELECT TOP 500 * 
-FROM PlaylistTrack
-
-SELECT TOP 10 *
-FROM Track
-
 SELECT 
 	PlaylistName = P.Name,
 	NumberOfTracks = COUNT(PT.TrackId)
@@ -156,3 +147,19 @@ FROM PlaylistTrack PT
 JOIN Playlist P
 ON P.PlaylistId = PT.PlaylistId
 GROUP BY P.Name
+
+-- tracks_no_id.sql: Provide a query that shows all the Tracks, but displays no IDs. 
+-- The result should include the Album name, Media type and Genre.
+
+SELECT
+	TrackName = T.Name, 
+	Album = A.Title,
+	MediaType = M.Name,
+	Genre = G.Name
+FROM Track T
+JOIN Album A
+ON T.AlbumId = A.AlbumId
+JOIN Genre G
+ON T.GenreId = G.GenreId
+JOIN MediaType M
+ON T.MediaTypeId = M.MediaTypeId
