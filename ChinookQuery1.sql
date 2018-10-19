@@ -260,3 +260,16 @@ ON I.InvoiceId = IL.InvoiceId
 WHERE YEAR(I.InvoiceDate) = '2013'
 GROUP BY T.Name
 ORDER BY NumberPurchased DESC
+
+-- top_5_tracks.sql: Provide a query that shows the top 5 most purchased songs.
+
+SELECT TOP 5
+	TopTrack = T.Name,
+	NumberPurchased = SUM(IL.Quantity)
+FROM InvoiceLine IL
+JOIN Track T
+ON IL.TrackId = T.TrackId
+JOIN Invoice I 
+ON I.InvoiceId = IL.InvoiceId
+GROUP BY T.Name
+ORDER BY NumberPurchased DESC
