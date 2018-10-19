@@ -291,3 +291,16 @@ JOIN Artist AR
 ON AR.ArtistId = AL.ArtistId
 GROUP BY AR.Name
 ORDER BY NumberPurchased DESC
+
+-- top_media_type.sql: Provide a query that shows the most purchased Media Type.
+
+SELECT TOP 1
+	Media = M.Name,
+	Purchases = SUM(IL.Quantity)
+FROM InvoiceLine IL
+JOIN Track T
+ON T.TrackId = IL.TrackId
+JOIN MediaType M
+ON M.MediaTypeId = T.MediaTypeId
+GROUP BY M.Name
+ORDER BY Purchases DESC
