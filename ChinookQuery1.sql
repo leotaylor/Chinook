@@ -136,3 +136,23 @@ SELECT
 	NumberPerCountry = Count(*)
 FROM Invoice
 Group BY BillingCountry
+
+-- playlists_track_count.sql: Provide a query that shows the total number of tracks in each playlist. 
+-- The Playlist name should be include on the resulant table.
+
+SELECT Top 10 *
+FROM Playlist
+
+SELECT TOP 500 * 
+FROM PlaylistTrack
+
+SELECT TOP 10 *
+FROM Track
+
+SELECT 
+	PlaylistName = P.Name,
+	NumberOfTracks = COUNT(PT.TrackId)
+FROM PlaylistTrack PT
+JOIN Playlist P
+ON P.PlaylistId = PT.PlaylistId
+GROUP BY P.Name
