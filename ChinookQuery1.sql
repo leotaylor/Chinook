@@ -205,3 +205,17 @@ FROM (
 	) as TotalsFor2009
 GROUP BY Employee
 ORDER BY Total DESC
+
+-- top_agent.sql: Which sales agent made the most in sales over all?
+
+SELECT TOP 1
+	Employee = E.FirstName + ' ' + E.LastName,
+	Total = SUM(I.Total)
+FROM Employee E
+JOIN Customer C
+ON E.EmployeeId = C.SupportRepId
+JOIN Invoice I
+ON I.CustomerId = C.CustomerId
+GROUP BY E.FirstName + ' ' + E.LastName
+Order BY Total DESC
+
