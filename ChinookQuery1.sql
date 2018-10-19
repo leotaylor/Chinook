@@ -118,8 +118,8 @@ on I.TrackId = T.TrackId
 -- line_item_track_artist.sql: Provide a query that includes the purchased track name AND artist name with each invoice line item.
 
 Select 
-	Track.Name,
-	Artist.Name,
+	TrackName = Track.Name,
+	Artist = Artist.Name,
 	I.InvoiceLineId
 From Track
 Join Album
@@ -128,3 +128,11 @@ Join Artist
 on Artist.ArtistId = Album.ArtistId
 Join InvoiceLine I 
 on I.TrackId = Track.TrackId
+
+-- country_invoices.sql: Provide a query that shows the # of invoices per country. HINT: GROUP BY
+
+SELECT
+	BillingCountry,
+	NumberPerCountry = Count(*)
+FROM Invoice
+Group BY BillingCountry
