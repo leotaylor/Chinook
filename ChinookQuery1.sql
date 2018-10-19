@@ -163,3 +163,13 @@ JOIN Genre G
 ON T.GenreId = G.GenreId
 JOIN MediaType M
 ON T.MediaTypeId = M.MediaTypeId
+
+-- invoices_line_item_count.sql: Provide a query that shows all Invoices but includes the # of invoice line items.
+
+SELECT 
+	Invoice = I.InvoiceId,
+	LinesItems = Count(IL.InvoiceLineId)
+FROM InvoiceLine IL
+Join Invoice I
+ON i.InvoiceId = il.InvoiceId
+GROUP BY I.InvoiceId
