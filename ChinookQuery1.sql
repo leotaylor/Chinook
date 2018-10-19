@@ -219,3 +219,14 @@ ON I.CustomerId = C.CustomerId
 GROUP BY E.FirstName + ' ' + E.LastName
 Order BY Total DESC
 
+-- sales_agent_customer_count.sql: Provide a query that shows the count of customers assigned to each sales agent.
+
+SELECT
+	Employee = E.FirstName + ' ' + E.LastName,
+	NumOfCustomer = Count(C.SupportRepId)
+FROM Customer C
+JOIN Employee E
+ON C.SupportRepId = E.EmployeeId
+GROUP BY E.FirstName + ' ' + E.LastName
+
+
