@@ -70,7 +70,7 @@ on I.CustomerId = C.CustomerId
 
 SELECT
 	InvoiceYear = YEAR(InvoiceDate),
-	InvoiceCount = COUNT(*) 
+	InvoiceCount = COUNT(InvoiceId) 
 FROM Invoice
 Where Year(InvoiceDate) = 2009 or Year(InvoiceDate) = 2011
 Group By Year(InvoiceDate)
@@ -89,13 +89,16 @@ Order BY Year(InvoiceDate)
 -- invoice_37_line_item_count.sql: Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for Invoice ID 37.
 
 SELECT 
+	InvoiceId = InvoiceLine.InvoiceId,
 	LineItems = Count(InvoiceLineId)
 FROM InvoiceLine
 WHERE InvoiceId = 37
+Group BY InvoiceLine.InvoiceId
 
 -- line_items_per_invoice.sql: Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for each Invoice. HINT: GROUP BY
 
-SELECT 
+SELECT
+	InvoiceId = InvoiceLine.InvoiceId, 
 	LineItems = Count(InvoiceLineId)
 FROM InvoiceLine
 Group By InvoiceId
@@ -109,6 +112,7 @@ SELECT
 FROM InvoiceLine I
 Join Track T
 on I.TrackId = T.TrackId
+Order BY I.InvoiceLineId
 
 -- line_item_track_artist.sql: Provide a query that includes the purchased track name AND artist name with each invoice line item.
 
@@ -195,7 +199,7 @@ FROM (
 	ON C.CustomerId = I.CustomerId
 	JOIN Employee E
 	ON E.EmployeeId = C.SupportRepId
-	WHERE YEAR(I.InvoiceDate) = '2009'
+	WHERE YEAR(I.InvoiceDate) = 2009
 	GROUP BY E.FirstName + ' ' + E.LastName
 	) as TotalsFor2009
 GROUP BY Employee
@@ -252,7 +256,7 @@ JOIN Track T
 ON IL.TrackId = T.TrackId
 JOIN Invoice I 
 ON I.InvoiceId = IL.InvoiceId
-WHERE YEAR(I.InvoiceDate) = '2013'
+WHERE YEAR(I.InvoiceDate) = 2013
 GROUP BY T.Name
 ORDER BY NumberPurchased DESC
 
