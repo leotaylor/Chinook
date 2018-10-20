@@ -69,27 +69,22 @@ on I.CustomerId = C.CustomerId
 -- total_invoices_{year}.sql: How many Invoices were there in 2009 and 2011?
 
 SELECT
-	Year2009 = Count(InvoiceId)
+	InvoiceYear = YEAR(InvoiceDate),
+	InvoiceCount = COUNT(*) 
 FROM Invoice
-Where Year(InvoiceDate) = 2009
-
-SELECT
-	Year2011 = Count(InvoiceId)
-FROM Invoice
-Where Year(InvoiceDate) = 2011
-
+Where Year(InvoiceDate) = 2009 or Year(InvoiceDate) = 2011
+Group By Year(InvoiceDate)
+Order BY Year(InvoiceDate)
 
 -- total_sales_{year}.sql: What are the respective total sales for each of those years?
 
 SELECT 
-	Sales2009 = SUM(Total)
+	InvoiceYear = YEAR(InvoiceDate),
+	Sales = SUM(Total)
 FROM Invoice
-WHERE YEAR(InvoiceDate) = 2009 
-
-SELECT 
-	Sales2011 = SUM(Total)
-FROM Invoice
-WHERE YEAR(InvoiceDate) = 2011 
+WHERE YEAR(InvoiceDate) = 2009  or Year(InvoiceDate) = 2011
+GROUP BY Year(InvoiceDate)
+Order BY Year(InvoiceDate)
 
 -- invoice_37_line_item_count.sql: Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for Invoice ID 37.
 
